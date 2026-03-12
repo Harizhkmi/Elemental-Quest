@@ -93,7 +93,7 @@ class Menu
 				break;
 
 			case "3":
-				player.Inventory.ShowInventory();
+				player.Inventory.ShowInventory(player);
 				break;
 
 			case "0":
@@ -137,12 +137,13 @@ class Shop
 	public static void OpenShop(Player player)
 	{
 		Console.Clear();
+		Console.WriteLine($"Player: {player.name} | Gold: {player.gold}");
 		Console.WriteLine("=== Potion Shop ===");
 		Console.WriteLine("{0,-5} {1,-20} {2,-10} {3,-15} {4,-10}", "No.", "Potion Name", "Type", "Effect", "Price");
 		Console.WriteLine(new string('-', 55));
 		for (int i = 0; i < shopPotions.Count; i++)
 		{
-			Console.WriteLine("{0,-5} {1,-20} {2,-10} {3,-15} {4,-10}", i + 1, shopPotions[i].name, shopPotions[i].type, shopPotions[i].description, shopPotions[i].effectValue, shopPotions[i].price);
+			Console.WriteLine("{0,-5} {1,-20} {2,-10} {3,-15} {4,-10}", i + 1, shopPotions[i].name, shopPotions[i].type, shopPotions[i].description, shopPotions[i].price);
 		}
 		Console.WriteLine(new string('-', 55));
 		Console.Write($"Choose which potion to buy (1 - {shopPotions.Count})/(0 - To exit) : ");
@@ -276,9 +277,10 @@ class Inventory
 	}
 
 	// Show all potions
-	public void ShowInventory()
+	public void ShowInventory(Player player)
 	{
 		Console.Clear();
+		Console.WriteLine($"Player: {player.name} | Gold: {player.gold}");
 		Console.WriteLine("=== Inventory ===");
 		Console.WriteLine("{0,-5} {1,-20} {2,-10} {3,-15}", "No.", "Potion Name", "Type", "Effect");
 		Console.WriteLine(new string('-', 55));
@@ -286,6 +288,10 @@ class Inventory
 		{
 			Console.WriteLine("{0,-5} {1,-20} {2,-10} {3,-15}", i + 1, Potions[i].name, Potions[i].type, Potions[i].description, Potions[i].effectValue);
 		}
+		Console.WriteLine(new string('-', 55));
+		Console.WriteLine("Press Enter To Back To Menu");
+		Console.ReadKey();
+		Menu.DisplayMenu(player);
 	}
 }
 
