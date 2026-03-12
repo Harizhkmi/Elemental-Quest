@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hariz\\Documents\\Hariz\\Coding\\c#\\Lab Session\\Elemental Quest\\Elemental Quest.csproj": {}
+    "C:\\Users\\hariz\\source\\repos\\Elemental-Quest\\Elemental Quest\\Elemental Quest.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hariz\\Documents\\Hariz\\Coding\\c#\\Lab Session\\Elemental Quest\\Elemental Quest.csproj": {
+    "C:\\Users\\hariz\\source\\repos\\Elemental-Quest\\Elemental Quest\\Elemental Quest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hariz\\Documents\\Hariz\\Coding\\c#\\Lab Session\\Elemental Quest\\Elemental Quest.csproj",
+        "projectUniqueName": "C:\\Users\\hariz\\source\\repos\\Elemental-Quest\\Elemental Quest\\Elemental Quest.csproj",
         "projectName": "Elemental Quest",
-        "projectPath": "C:\\Users\\hariz\\Documents\\Hariz\\Coding\\c#\\Lab Session\\Elemental Quest\\Elemental Quest.csproj",
+        "projectPath": "C:\\Users\\hariz\\source\\repos\\Elemental-Quest\\Elemental Quest\\Elemental Quest.csproj",
         "packagesPath": "C:\\Users\\hariz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hariz\\Documents\\Hariz\\Coding\\c#\\Lab Session\\Elemental Quest\\obj\\",
+        "outputPath": "C:\\Users\\hariz\\source\\repos\\Elemental-Quest\\Elemental Quest\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\hariz\\AppData\\Roaming\\NuGet\\NuGet.Config",
