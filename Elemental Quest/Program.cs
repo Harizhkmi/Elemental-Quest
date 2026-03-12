@@ -308,6 +308,6 @@ class Game
 		string name = Console.ReadLine();
 		Player player1 = new Player(name);
 		Menu.DisplayMenu(player1);
-		
+		Console.WriteLine("Thank you for playing Elemental Quest! Goodbye!");
 	}
 }
