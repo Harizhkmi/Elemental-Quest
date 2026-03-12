@@ -13,8 +13,9 @@ class Character
 	private int Shield;
 	private int Damage;
 	private string Element;
-  
-	public Character(string name) {
+
+	public Character(string name)
+	{
 		Name = name;
 		Level = 1;
 		HealthPoint = MaxHealth;
@@ -26,7 +27,7 @@ class Character
 
 	public string name
 	{
-		get {  return Name; }
+		get { return Name; }
 	}
 	public int maxHealth
 	{
@@ -38,7 +39,7 @@ class Character
 		set
 		{
 			if (value < 0) HealthPoint = 0;
-			else if(value>MaxHealth) HealthPoint = MaxHealth;
+			else if (value > MaxHealth) HealthPoint = MaxHealth;
 			else HealthPoint = value;
 		}
 	}
@@ -49,6 +50,20 @@ class Character
 		set { Shield = value; }
 	}
 
+	public void Attack(Character target)
+	{
+		if (target.shield > 0)
+		{
+			target.shield--;
+			Console.WriteLine($"{target.name} blocked the attack!");
+		}
+		else
+		{
+			target.healthPoint -= Damage;
+			Console.WriteLine($"{name} dealt {Damage} damage to {target.name}!");
+		}
+
+	}
 }
 
 class Player : Character
@@ -66,6 +81,7 @@ class Player : Character
 		get { return Gold; }
 		set { Gold = value; }
 	}
+
 }
 
 class Menu
