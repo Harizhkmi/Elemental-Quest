@@ -84,6 +84,13 @@ class Player : Character
 
 }
 
+class Enemy : Character
+{
+	public Enemy(string name) : base(name)
+	{
+	}
+}
+
 class Menu
 {
 	public static void DisplayMenu(Player player)
