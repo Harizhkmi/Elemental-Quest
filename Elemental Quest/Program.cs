@@ -50,6 +50,12 @@ class Character
 		set { Shield = value; }
 	}
 
+	public int damage
+	{
+		get { return Damage; }
+		set { Damage = value; }
+	}
+
 	public void Attack(Character target)
 	{
 		if (target.shield > 0)
@@ -86,10 +92,75 @@ class Player : Character
 
 class Enemy : Character
 {
-	public Enemy(string name) : base(name)
+	public Enemy(string name, int healthpoint, int _damage) : base(name)
 	{
+		healthPoint = healthpoint;
+		damage = _damage;
 	}
 }
+
+
+class Battle
+{
+	public static void StartBattle(Player player, Enemy enemy)
+	{	
+		Console.Clear();
+		Console.WriteLine($"A wild {enemy.name} appeared!");
+
+		while (player.healthPoint > 0 && enemy.healthPoint > 0)
+		{
+			Console.WriteLine($"\n{player.name} HP: {player.healthPoint}");
+			Console.WriteLine($"{enemy.name} HP: {enemy.healthPoint}");
+
+			Console.WriteLine("\n1. Attack");
+			Console.WriteLine("2. Use Potion");
+			Console.WriteLine("0. Run");
+
+			Console.Write("Action: ");
+			string choice = Console.ReadLine();
+
+			if (choice == "1")
+			{
+
+				player.Attack(enemy);
+
+			}
+			else if (choice == "2")
+			{
+				player.Inventory.UsePotion(player);
+			}
+			else if (choice == "0")
+			{
+				Console.WriteLine("You ran away!");
+				Console.ReadKey();
+				return;
+			}
+
+			if (enemy.healthPoint > 0)
+			{
+				enemy.Attack(player);
+			}
+			Console.ReadKey();
+			Console.Clear();
+		}
+
+		if (player.healthPoint > 0)
+		{
+			Console.WriteLine($"\nYou defeated {enemy.name}!");
+			player.gold += 50;
+			Console.WriteLine("You earned 50 gold!");
+		}
+		else
+		{
+			Console.WriteLine("\nYou were defeated...");
+		}
+
+		Console.ReadKey();
+		Menu.DisplayMenu(player);
+	}
+}
+
+
 
 class Menu
 {
@@ -108,7 +179,7 @@ class Menu
 		switch (input)
 		{
 			case "1":
-				ChooseLevel();
+				ChooseLevel(player);
 				break;
 
 			case "2":
@@ -131,15 +202,43 @@ class Menu
 	
 	}
 
-	public static void ChooseLevel()
+	public static void ChooseLevel(Player player)
 	{
 		Console.Clear();
 		Console.WriteLine("=== LEVEL SELECTION ===");
-		Console.WriteLine("Level 1");
-		Console.WriteLine("Level 2");
-		Console.WriteLine("Level 3");
-		Console.WriteLine("\nPress any key to return to main menu...");
-		Console.ReadKey();
+		Console.WriteLine("1. Level 1 (Goblin)");
+		Console.WriteLine("2. Level 2 (Orc)");
+		Console.WriteLine("3. Level 3 (Dragon)");
+		Console.WriteLine("0. Back");
+
+		Console.Write("Choose level: ");
+		string choice = Console.ReadLine();
+
+
+
+		switch (choice)
+		{
+			case "1":
+
+				Battle.StartBattle(player, new Enemy("Goblin", 60, 10));
+				break;
+
+			case "2":
+				Battle.StartBattle(player, new Enemy("Orc", 100, 20));
+				break;
+
+			case "3":
+				Battle.StartBattle(player, new Enemy("Dragon", 150, 35));
+				break;
+
+			case "0":
+				return;
+
+			default:
+				Console.WriteLine("Invalid choice!");
+				Console.ReadKey();
+				break;
+		}
 	}
 
 	
@@ -315,6 +414,40 @@ class Inventory
 		Console.WriteLine("Press Enter To Back To Menu");
 		Console.ReadKey();
 		Menu.DisplayMenu(player);
+	}
+
+	public void UsePotion(Player player)
+	{
+		if (Potions.Count == 0)
+		{
+			Console.WriteLine("No potions in inventory!");
+			return;
+		}
+		Console.WriteLine("Choose a potion to use:");
+		for (int i = 0; i < Potions.Count; i++)
+		{
+			Console.WriteLine($"{i + 1}. {Potions[i].name} - {Potions[i].description}");
+		}
+		Console.WriteLine("0. Back");
+		Console.Write("Select an option: ");
+		string input = Console.ReadLine();
+		if (input == "0")
+			return;
+		int choice;
+		if (int.TryParse(input, out choice) && choice > 0 && choice <= Potions.Count)
+		{
+			Potion selectedPotion = Potions[choice - 1];
+			selectedPotion.Use(player);
+			Potions.RemoveAt(choice - 1); // Remove used potion from inventory
+			Console.WriteLine($"{selectedPotion.name} potion used!");
+			Console.ReadKey();
+		}
+		else
+		{
+			Console.WriteLine("Invalid choice!");
+			Console.ReadKey();
+		}
+
 	}
 }
 
