@@ -2,27 +2,35 @@
 using System.Collections.Generic;
 using System.Text;
 
-public class Character
+public abstract class Character
 {
+
 	private string Name;
 	private int Level;
-	private const int MaxHealth = 100;
+	private int MaxHealth;
 	private int HealthPoint;
 	private int Shield;
+	private int Agility;
 	private int Damage;
 	private string Element;
 
-	public Character(string name)
+	public Character(string name, int damage, int maxhealth)
 	{
 		Name = name;
+		Damage = damage;
 		Level = 1;
+		MaxHealth = maxhealth;
 		HealthPoint = MaxHealth;
 		Shield = 0;
-		Damage = 20;
+		Agility = 0;
 		Element = "";
-
+		
 	}
-
+	public string element
+	{
+		get { return Element; }
+		set { Element = value; }
+	}
 	public string name
 	{
 		get { return Name; }
@@ -48,24 +56,56 @@ public class Character
 		set { Shield = value; }
 	}
 
+	public int agility
+	{
+		get { return Agility; }
+		set { Agility = value; }
+	}
+
 	public int damage
 	{
 		get { return Damage; }
 		set { Damage = value; }
 	}
 
-	public void Attack(Character target)
+	public virtual void Attack(Character attacker,Character target)
 	{
+		int finalDamage = (int)(attacker.damage * Elements.ElementMultiplier(attacker.element, target.element));
 		if (target.shield > 0)
 		{
 			target.shield--;
 			Console.WriteLine($"{target.name} blocked the attack!");
 		}
-		else
+		else if (target.agility > 0)
 		{
-			target.healthPoint -= Damage;
-			Console.WriteLine($"{name} dealt {Damage} damage to {target.name}!");
+			target.agility--;
+			// Let's give them a 50% chance to dodge
+			if (new Random().Next(0, 100) < 75)
+			{
+				Console.WriteLine($"{target.name} nimbly dodged the attack!");
+				return; // EXIT the method early. No damage happens.
+			}
+			else
+			{
+				target.TakeDamage(finalDamage);
+			}
+		}
+		else {
+  			target.TakeDamage(finalDamage);
 		}
 
 	}
+
+	public virtual void TakeDamage(int damage)
+	{
+		this.healthPoint -= damage;
+		Console.WriteLine($"{name} takes {damage} damage! Remaining HP: {healthPoint}");
+	}
+
+	public virtual void UseSpecialSkill(Character target)
+	{
+		Console.WriteLine($"{name} uses a special skill on {target.name}!");
+	}
+
+
 }

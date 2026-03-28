@@ -60,19 +60,20 @@ class Menu
 		{
 			case "1":
 
-				Battle.StartBattle(player, new Enemy("Goblin", 60, 10));
+				Battle.StartBattle(player, new Enemy("Goblin", 10, 100));
 				break;
 
 			case "2":
-				Battle.StartBattle(player, new Enemy("Orc", 100, 20));
+				Battle.StartBattle(player, new Enemy("Orc", 20, 150));
 				break;
 
 			case "3":
-				Battle.StartBattle(player, new Enemy("Dragon", 150, 35));
+				Battle.StartBattle(player, new BossEnemy("Dragon", 35, 200));
 				break;
 
 			case "0":
-				return;
+				Menu.DisplayMenu(player);
+				break;
 
 			default:
 				Console.WriteLine("Invalid choice!");

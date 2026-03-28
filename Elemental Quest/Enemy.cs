@@ -4,10 +4,8 @@ using System.Text;
 
 class Enemy : Character
 {
-	public Enemy(string name, int healthpoint, int _damage) : base(name)
+	public Enemy(string name, int damage, int maxhealth) : base(name, damage, maxhealth)
 	{
-		healthPoint = healthpoint;
-		damage = _damage;
 	}
 }
 
