@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-public abstract class Character
+public abstract class Character : ICombat
 {
 
 	private string Name;
-	private int Level;
 	private int MaxHealth;
 	private int HealthPoint;
 	private int Shield;
@@ -18,7 +17,6 @@ public abstract class Character
 	{
 		Name = name;
 		Damage = damage;
-		Level = 1;
 		MaxHealth = maxhealth;
 		HealthPoint = MaxHealth;
 		Shield = 0;
@@ -68,9 +66,9 @@ public abstract class Character
 		set { Damage = value; }
 	}
 
-	public virtual void Attack(Character attacker,Character target)
+	public virtual void Attack(Character target)
 	{
-		int finalDamage = (int)(attacker.damage * Elements.ElementMultiplier(attacker.element, target.element));
+		int finalDamage = (int)(this.damage * Elements.ElementMultiplier(this.element, target.element));
 		if (target.shield > 0)
 		{
 			target.shield--;

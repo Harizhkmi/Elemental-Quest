@@ -47,7 +47,7 @@ class Player : Character
 					Console.WriteLine("CRITICAL HIT!");
 				}
 
-				Attack(this, target);
+				Attack(target);
 				this.damage = (int)originalDamage; // Reset damage back to normal
 				Console.WriteLine($"{name} used Fireball! Shield destroyed!");
 			}
@@ -66,7 +66,7 @@ class Player : Character
 					Console.WriteLine("CRITICAL HIT!");
 				}
 
-				Attack(this, target);
+				Attack(target);
 				this.damage = (int)originalDamage; // Reset damage back to normal
 				Console.WriteLine($"{name} used Leaf Veil! Agility Increase For 2 rounds");
 			}

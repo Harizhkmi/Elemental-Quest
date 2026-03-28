@@ -61,7 +61,7 @@ class Battle
 			if (action == "1")
 			{
 				Console.WriteLine($"\n > {player.name} attacks with {player.element}!");
-				player.Attack(player, enemy);
+				player.Attack(enemy);
 			}
 			else if (action == "2")
 			{
@@ -91,7 +91,7 @@ class Battle
 			{
 				Console.WriteLine($"\n > {enemy.name} is striking back...");
 				System.Threading.Thread.Sleep(600); // Adds a small delay for better feel
-				enemy.Attack(enemy, player);
+				enemy.Attack(player);
 			}
 
 			Console.WriteLine("\n Press any key to continue...");

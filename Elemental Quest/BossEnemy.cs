@@ -29,10 +29,10 @@ public class BossEnemy : Character
 
 	}
 
-	public override void Attack(Character attacker, Character target)
+	public override void Attack(Character target)
 	{
 		this.CheckPhase();
-		int finalDamage = (int)(attacker.damage * Elements.ElementMultiplier(attacker.element, target.element));
+		int finalDamage = (int)(this.damage * Elements.ElementMultiplier(this.element, target.element));
 		if (target.shield > 0)
 		{
 			target.shield--;

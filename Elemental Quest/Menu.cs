@@ -60,11 +60,11 @@ class Menu
 		{
 			case "1":
 
-				Battle.StartBattle(player, new Enemy("Goblin", 10, 100));
+				Battle.StartBattle(player, new Enemy("Cyclop", 10, 100));
 				break;
 
 			case "2":
-				Battle.StartBattle(player, new Enemy("Orc", 20, 150));
+				Battle.StartBattle(player, new Enemy("Balmond", 20, 150));
 				break;
 
 			case "3":
@@ -76,8 +76,9 @@ class Menu
 				break;
 
 			default:
-				Console.WriteLine("Invalid choice!");
+				throw new Exception("Invalid level selected!");
 				Console.ReadKey();
+				Menu.DisplayMenu(player);
 				break;
 		}
 	}
