@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Text;
 
 class Battle
@@ -71,36 +72,42 @@ class Battle
 			Console.WriteLine("  4. 🎒 Potion        0. 🏃 Run");
 			Console.Write("\n  Command > ");
 
-			string action = Console.ReadLine();
+			string action = ReadInputWithTimeout(15);
 
-			if (action == "1")
+			if (action == null)
 			{
-				Console.WriteLine($"\n  > {player.name} attacks with {player.element}!");
-				player.Attack(enemy);
+				Console.WriteLine("\nTime's up! You hesitated...");
 			}
-			else if (action == "2")
-			{
-				Console.WriteLine($"\n  > {player.name} used his special move!");
-				player.UseSpecialSkill(enemy);
-			}
-			else if (action == "3")
-			{
-				Console.WriteLine($"\n  > {player.name} tries to change element!");
-				Elements.ChooseElement(player);
-				Console.WriteLine($"  > {player.name} changed element to {player.element}!");
-			}
-			else if (action == "4")
-			{
-				Console.WriteLine($"\n  > {player.name} opened inventory!");
-				player.Inventory.UsePotion(player);
-			}
-			else if (action == "0")
-			{
-				Console.ForegroundColor = ConsoleColor.Yellow;
-				Console.WriteLine("\n  💨 You escaped the battle!");
-				Console.ResetColor();
-				Console.ReadKey();
-				return;
+			else{
+				if (action == "1")
+				{
+					Console.WriteLine($"\n  > {player.name} attacks with {player.element}!");
+					player.Attack(enemy);
+				}
+				else if (action == "2")
+				{
+					Console.WriteLine($"\n  > {player.name} used his special move!");
+					player.UseSpecialSkill(enemy);
+				}
+				else if (action == "3")
+				{
+					Console.WriteLine($"\n  > {player.name} tries to change element!");
+					Elements.ChooseElement(player);
+					Console.WriteLine($"  > {player.name} changed element to {player.element}!");
+				}
+				else if (action == "4")
+				{
+					Console.WriteLine($"\n  > {player.name} opened inventory!");
+					player.Inventory.UsePotion(player);
+				}
+				else if (action == "0")
+				{
+					Console.ForegroundColor = ConsoleColor.Yellow;
+					Console.WriteLine("\n  💨 You escaped the battle!");
+					Console.ResetColor();
+					Console.ReadKey();
+					return;
+				}
 			}
 
 			if (enemy.healthPoint > 0)
@@ -114,8 +121,12 @@ class Battle
 			Console.ReadKey();
 			Console.Clear();
 		}
-
 		// --- RESULT ---
+		Battle.EndBattle(player, enemy);
+		Console.ReadKey();
+	}
+	private static void EndBattle(Player player, Character enemy)
+	{
 		if (player.healthPoint > 0)
 		{
 			Console.ForegroundColor = ConsoleColor.Yellow;
@@ -134,6 +145,21 @@ class Battle
 			Console.WriteLine("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
 			Console.ResetColor();
 		}
-		Console.ReadKey();
+	}
+	public static string ReadInputWithTimeout(int seconds)
+	{
+		string input = null;
+
+		var task = System.Threading.Tasks.Task.Run(() =>
+		{
+			input = Console.ReadLine();
+		});
+
+		bool completed = task.Wait(TimeSpan.FromSeconds(seconds));
+
+		if (!completed)
+			return null;
+
+		return input;
 	}
 }

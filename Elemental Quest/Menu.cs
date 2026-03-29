@@ -84,6 +84,14 @@ class Menu
 		{
 			Console.Write("  Choose your destination: ");
 			string choice = Console.ReadLine();
+			Console.Clear();
+			Console.WriteLine("=== BATTLE RULES ===");
+			Console.WriteLine("• Each round you have ONLY 15 seconds to act.");
+			Console.WriteLine("• You may switch element, use skill or potion.");
+			Console.WriteLine("• If time runs out, your turn is skipped!");
+			Console.WriteLine();
+			Console.WriteLine("Press ENTER to start battle...");
+			Console.ReadLine();
 
 			switch (choice)
 			{

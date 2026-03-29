@@ -12,7 +12,6 @@ public class Elements{
 	}
 	public ElementType Type { get; private set; }
 
-
 	public Elements(ElementType type)
 	{
 		Type = type;
