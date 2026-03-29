@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 class Inventory
 {
@@ -22,7 +21,12 @@ class Inventory
 	public void ShowInventory(Player player)
 	{
 		Console.Clear();
-		Console.WriteLine($"Player: {player.name} | Gold: {player.gold}");
+		if (Potions.Count == 0)
+		{
+			Console.WriteLine("Inventory is empty.");
+			Console.ReadKey();
+			return;
+		}
 		Console.WriteLine("=== Inventory ===");
 		Console.WriteLine("{0,-5} {1,-20} {2,-10} {3,-15}", "No.", "Potion Name", "Type", "Effect");
 		Console.WriteLine(new string('-', 55));

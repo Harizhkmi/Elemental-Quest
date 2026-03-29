@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Elemental Quest")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+df17a57ec64b087ad7a52a3cd5c1302f7cc07acb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+954ce3abc86b878a3dafe200d2fe6ac30d5c6e75")]
 [assembly: System.Reflection.AssemblyProductAttribute("Elemental Quest")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Elemental Quest")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -28,6 +28,7 @@ class Player : Character
 	{
 		this.healthPoint = 100;
 		this.shield = 0;
+		this.agility = 0;
 		this.SpecialSkillUses = 0;
 	}
 
@@ -72,10 +73,11 @@ class Player : Character
 			}
 			SpecialSkillUses++;
 		}
-		else { 
+		else
+		{
 			Console.WriteLine("You have ran out special skills.");
 		}
-		
+
 	}
 }
 
