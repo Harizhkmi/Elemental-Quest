@@ -1,9 +1,4 @@
-﻿
-using System.Globalization;
-using System.Numerics;
-using System.Collections.Generic;
-
-class Game
+﻿class Game
 {
 	static void Main()
 	{
@@ -51,7 +46,7 @@ _||_    .-;`\..../`;_.-^-._
  |:'\ |   /'''::''|   .:.   |
   \ /\;-,/\   ::  |..:::::..|
    \ <` >  >._::_.| ':::::' |
-    `""`  /   ^^  |   ':'   |
+    `""`   /   ^^  |   ':'   |
           |       \    :    /
           |        \   :   / 
           |___/\___|`-.:.-`
@@ -134,4 +129,3 @@ _||_    .-;`\..../`;_.-^-._
 		Menu.DisplayMenu(player);
 	}
 }
-

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Numerics;
-using System.Text;
-
-class Battle
+﻿class Battle
 {
 	static Random rnd = new Random();
 	public static void StartBattle(Player player, Character enemy)
@@ -19,12 +14,18 @@ class Battle
 		Console.ResetColor();
 
 		Elements.ChooseElement(player);
-		int elementInput = rnd.Next(1, 4);
-		enemy.element = Elements.SetElement(elementInput);
 		Console.Clear();
 
 		while (player.healthPoint > 0 && enemy.healthPoint > 0)
 		{
+
+			// 🔮 Enemy prepares next element
+			enemy.NextElement = ElementHintSystem.GetRandomElement();
+
+			Console.ForegroundColor = ConsoleColor.DarkYellow;
+			Console.WriteLine($"\n 🔍 HINT: {ElementHintSystem.GetHint(enemy.NextElement)}");
+			Console.ResetColor();
+
 			// --- TOP HUD ---
 			Console.ForegroundColor = ConsoleColor.Cyan;
 			Console.WriteLine("╔" + new string('═', 54) + "╗");
@@ -32,7 +33,7 @@ class Battle
 
 			// Row 1: Names (Total width inside 54)
 			string pName = $" PLAYER: {player.name} ({player.element})";
-			string eName = $"ENEMY: {enemy.name} ({enemy.element}) ";
+			string eName = $"ENEMY: {enemy.name} (?) ";
 			Console.WriteLine($"║ {pName.PadRight(26)}{eName.PadLeft(26)} ║");
 
 			// Row 2: HP
@@ -72,33 +73,42 @@ class Battle
 			Console.WriteLine("  4. 🎒 Potion        0. 🏃 Run");
 			Console.Write("\n  Command > ");
 
-			string action = ReadInputWithTimeout(15);
+			bool playerEndedTurn = false;
 
-			if (action == null)
+			while (!playerEndedTurn)
 			{
-				Console.WriteLine("\nTime's up! You hesitated...");
-			}
-			else{
-				if (action == "1")
+				Console.Write("\n  Command > ");
+				string action = ReadInputWithTimeout(15);
+
+				if (action == null)
+				{
+					Console.WriteLine("\nTime's up! You hesitated...");
+					playerEndedTurn = true;
+				}
+				else if (action == "1")
 				{
 					Console.WriteLine($"\n  > {player.name} attacks with {player.element}!");
 					player.Attack(enemy);
+					playerEndedTurn = true;   // ⚠️ end turn
 				}
 				else if (action == "2")
 				{
 					Console.WriteLine($"\n  > {player.name} used his special move!");
 					player.UseSpecialSkill(enemy);
+					playerEndedTurn = true;   // ⚠️ end turn
 				}
 				else if (action == "3")
 				{
 					Console.WriteLine($"\n  > {player.name} tries to change element!");
 					Elements.ChooseElement(player);
 					Console.WriteLine($"  > {player.name} changed element to {player.element}!");
+					// ❗ TAK end turn
 				}
 				else if (action == "4")
 				{
 					Console.WriteLine($"\n  > {player.name} opened inventory!");
 					player.Inventory.UsePotion(player);
+					playerEndedTurn = true;   // ⚠️ end turn
 				}
 				else if (action == "0")
 				{
@@ -108,11 +118,21 @@ class Battle
 					Console.ReadKey();
 					return;
 				}
+				else
+				{
+					Console.WriteLine("Invalid action.");
+				}
+
+				if (!playerEndedTurn)
+				{
+					Console.WriteLine("\n  Choose next action (Attack / Skill / Potion)...");
+				}
 			}
 
 			if (enemy.healthPoint > 0)
 			{
-				Console.WriteLine($"\n  > {enemy.name} is striking back...");
+				enemy.element = enemy.NextElement.ToString();
+				Console.WriteLine($"\n  > {enemy.name} attacks with {enemy.element}!");
 				System.Threading.Thread.Sleep(600);
 				enemy.Attack(player);
 			}

@@ -13,6 +13,9 @@ public abstract class Character : ICombat
 	private int Damage;
 	private string Element;
 
+	public Elements.ElementType NextElement { get; set; }
+
+
 	public Character(string name, int damage, int maxhealth)
 	{
 		Name = name;

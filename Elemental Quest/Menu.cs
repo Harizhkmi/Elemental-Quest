@@ -34,7 +34,7 @@ class Menu
 				switch (input)
 				{
 					case "1":
-						ChooseLevel(player);
+						Level.ChooseLevel(player);
 						break;
 
 					case "2":
@@ -61,66 +61,6 @@ class Menu
 				Console.WriteLine("  Press any key to try again...");
 				Console.ReadKey();
 			}
-		}
-	}
-
-	public static void ChooseLevel(Player player)
-	{
-		Console.Clear();
-		// Header Section
-		Console.ForegroundColor = ConsoleColor.Green;
-		Console.WriteLine("==========================================");
-		Console.WriteLine("        🗺️  LEVEL SELECTION  🗺️        ");
-		Console.WriteLine("==========================================");
-		Console.ResetColor();
-
-		Console.WriteLine("  1. 👁️  Level 1 (Cyclop)");
-		Console.WriteLine("  2. 🪓  Level 2 (Balmond)");
-		Console.WriteLine("  3. 🐉  Level 3 (Dragon)");
-		Console.WriteLine("  0. ↩️  Back");
-		Console.WriteLine("------------------------------------------");
-
-		try
-		{
-			Console.Write("  Choose your destination: ");
-			string choice = Console.ReadLine();
-			Console.Clear();
-			Console.WriteLine("=== BATTLE RULES ===");
-			Console.WriteLine("• Each round you have ONLY 15 seconds to act.");
-			Console.WriteLine("• You may switch element, use skill or potion.");
-			Console.WriteLine("• If time runs out, your turn is skipped!");
-			Console.WriteLine();
-			Console.WriteLine("Press ENTER to start battle...");
-			Console.ReadLine();
-
-			switch (choice)
-			{
-				case "1":
-					Battle.StartBattle(player, new Enemy("Cyclop", 10, 100));
-					break;
-
-				case "2":
-					Battle.StartBattle(player, new Enemy("Balmond", 20, 150));
-					break;
-
-				case "3":
-					Battle.StartBattle(player, new BossEnemy("Dragon", 35, 200));
-					break;
-
-				case "0":
-					return; // Returns to the DisplayMenu loop naturally
-
-				default:
-					throw new Exception("  ⚠️  Invalid level selected!");
-			}
-		}
-		catch (Exception ex)
-		{
-			Console.ForegroundColor = ConsoleColor.Red;
-			Console.WriteLine("\n" + ex.Message);
-			Console.ResetColor();
-			Console.WriteLine("  Press any key to return...");
-			Console.ReadKey();
 		}
 	}
 }
