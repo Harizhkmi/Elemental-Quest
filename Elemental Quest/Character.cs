@@ -80,7 +80,7 @@ public abstract class Character : ICombat
 		else if (target.agility > 0)
 		{
 			target.agility--;
-			// Let's give them a 50% chance to dodge
+			// Let's give them a 75% chance to dodge
 			if (new Random().Next(0, 100) < 75)
 			{
 				Console.WriteLine($"{target.name} nimbly dodged the attack!");
