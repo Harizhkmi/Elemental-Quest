@@ -18,8 +18,8 @@ public class BossEnemy : Character
 			if (healthPoint <= 60 && Phase == 1)
 			{
 				this.Phase = 2;
-				this.shield += 2;
-				this.damage += 10;
+				this.Shield += 2;
+				this.Damage += 10;
 
 				Console.WriteLine("🔥 BOSS PHASE 2 ACTIVATED!");
 				Console.WriteLine("The boss becomes enraged!");
@@ -32,15 +32,15 @@ public class BossEnemy : Character
 	public override void Attack(Character target)
 	{
 		this.CheckPhase();
-		int finalDamage = (int)(this.damage * Elements.ElementMultiplier(this.element, target.element));
-		if (target.shield > 0)
+		int finalDamage = (int)(this.Damage * Elements.ElementMultiplier(this.Element, target.Element)) ;
+		if (target.Shield > 0)
 		{
-			target.shield--;
+			target.Shield--;
 			Console.WriteLine($"{target.name} blocked the attack!");
 		}
-		else if (target.agility > 0)
+		else if (target.Agility > 0)
 		{
-			target.agility--;
+			target.Agility--;
 			// Let's give them a 50% chance to dodge
 			if (new Random().Next(0, 100) < 75)
 			{

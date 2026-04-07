@@ -27,48 +27,48 @@ class Player : Character
 	public void ResetForBattle()
 	{
 		this.healthPoint = 100;
-		this.shield = 0;
-		this.agility = 0;
+		this.Shield = 0;
+		this.Agility = 0;
 		this.SpecialSkillUses = 0;
 	}
 
-	public virtual void UseSpecialSkill(Character target)
+	public override void UseSpecialSkill(Character target)
 	{
 		if (SpecialSkillUses < 2)
 		{
-			float originalDamage = this.damage;
-			if (this.element == "Fire")
+			float originalDamage = this.Damage;
+			if (this.Element == "Fire")
 			{
-				target.shield = 0;
+				target.Shield = 0;
 
 				// Logic: 50% chance to double damage (Crit)
 				if (new Random().Next(0, 100) < 50)
 				{
-					this.damage *= 2;
+					this.Damage *= 2;
 					Console.WriteLine("CRITICAL HIT!");
 				}
 
 				Attack(target);
-				this.damage = (int)originalDamage; // Reset damage back to normal
+				this.Damage = (int)originalDamage; // Reset damage back to normal
 				Console.WriteLine($"{name} used Fireball! Shield destroyed!");
 			}
-			else if (this.element == "Water")
+			else if (this.Element == "Water")
 			{
 				this.healthPoint += 30;
-				this.shield = 2; // Tell the game this lasts 2 rounds
+				this.Shield = 2; // Tell the game this lasts 2 rounds
 				Console.WriteLine($"{name} used Water Surge! Healed +30HP & Activate Shield for 2 rounds.");
 			}
-			else if (this.element == "Grass")
+			else if (this.Element == "Grass")
 			{
-				this.agility = 3;
+				this.Agility = 3;
 				if (new Random().Next(0, 100) < 50)
 				{
-					this.damage *= 2;
+					this.Damage *= 2;
 					Console.WriteLine("CRITICAL HIT!");
 				}
 
 				Attack(target);
-				this.damage = (int)originalDamage; // Reset damage back to normal
+				this.Damage = (int)originalDamage; // Reset damage back to normal
 				Console.WriteLine($"{name} used Leaf Veil! Agility Increase For 2 rounds");
 			}
 			SpecialSkillUses++;

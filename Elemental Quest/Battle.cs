@@ -32,7 +32,7 @@
 			Console.ResetColor();
 
 			// Row 1: Names (Total width inside 54)
-			string pName = $" PLAYER: {player.name} ({player.element})";
+			string pName = $" PLAYER: {player.name} ({player.Element})";
 			string eName = $"ENEMY: {enemy.name} (?) ";
 			Console.WriteLine($"║ {pName.PadRight(26)}{eName.PadLeft(26)} ║");
 
@@ -51,14 +51,14 @@
 
 			// Build Player Status String
 			string pStatus = "";
-			if (player.shield > 0) pStatus += "[SHIELDED] ";
-			if (player.agility > 0) pStatus += "[AGILE]";
+			if (player.Shield > 0) pStatus += "[ShieldED] ";
+			if (player.Agility > 0) pStatus += "[AGILE]";
 			Console.Write(pStatus.PadRight(26));
 
 			// Build Enemy Status String
 			string eStatus = "";
-			if (enemy.shield > 0) eStatus += "[SHIELDED] ";
-			if (enemy.agility > 0) eStatus += "[AGILE]";
+			if (enemy.Shield > 0) eStatus += "[ShieldED] ";
+			if (enemy.Agility > 0) eStatus += "[AGILE]";
 			Console.Write(eStatus.PadLeft(26));
 
 			Console.WriteLine(" ║");
@@ -87,7 +87,7 @@
 				}
 				else if (action == "1")
 				{
-					Console.WriteLine($"\n  > {player.name} attacks with {player.element}!");
+					Console.WriteLine($"\n  > {player.name} attacks with {player.Element}!");
 					player.Attack(enemy);
 					playerEndedTurn = true;   // ⚠️ end turn
 				}
@@ -101,7 +101,7 @@
 				{
 					Console.WriteLine($"\n  > {player.name} tries to change element!");
 					Elements.ChooseElement(player);
-					Console.WriteLine($"  > {player.name} changed element to {player.element}!");
+					Console.WriteLine($"  > {player.name} changed element to {player.Element}!");
 					// ❗ TAK end turn
 				}
 				else if (action == "4")
@@ -131,8 +131,8 @@
 
 			if (enemy.healthPoint > 0)
 			{
-				enemy.element = enemy.NextElement.ToString();
-				Console.WriteLine($"\n  > {enemy.name} attacks with {enemy.element}!");
+				enemy.Element = enemy.NextElement.ToString();
+				Console.WriteLine($"\n  > {enemy.name} attacks with {enemy.Element}!");
 				System.Threading.Thread.Sleep(600);
 				enemy.Attack(player);
 			}

@@ -62,7 +62,7 @@ class Potion
 		}
 		else if (Type == "Shield")
 		{
-			player.shield = EffectValue;
+			player.Shield = EffectValue;
 			Console.WriteLine($"Shield activated for {EffectValue} rounds!");
 		}
 	}

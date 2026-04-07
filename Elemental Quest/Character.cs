@@ -8,10 +8,10 @@ public abstract class Character : ICombat
 	private string Name;
 	private int MaxHealth;
 	private int HealthPoint;
-	private int Shield;
-	private int Agility;
-	private int Damage;
-	private string Element;
+	public int Damage;
+	public int Shield;
+	public int Agility;	
+	public string Element;
 
 	public Elements.ElementType NextElement { get; set; }
 
@@ -26,11 +26,6 @@ public abstract class Character : ICombat
 		Agility = 0;
 		Element = "";
 		
-	}
-	public string element
-	{
-		get { return Element; }
-		set { Element = value; }
 	}
 	public string name
 	{
@@ -51,35 +46,19 @@ public abstract class Character : ICombat
 		}
 	}
 
-	public int shield
-	{
-		get { return Shield; }
-		set { Shield = value; }
-	}
 
-	public int agility
-	{
-		get { return Agility; }
-		set { Agility = value; }
-	}
-
-	public int damage
-	{
-		get { return Damage; }
-		set { Damage = value; }
-	}
 
 	public virtual void Attack(Character target)
 	{
-		int finalDamage = (int)(this.damage * Elements.ElementMultiplier(this.element, target.element));
-		if (target.shield > 0)
+		int finalDamage = (int)(this.Damage * Elements.ElementMultiplier(this.Element, target.Element));
+		if (target.Shield > 0)
 		{
-			target.shield--;
+			target.Shield--;
 			Console.WriteLine($"{target.name} blocked the attack!");
 		}
-		else if (target.agility > 0)
+		else if (target.Agility > 0)
 		{
-			target.agility--;
+			target.Agility--;
 			// Let's give them a 75% chance to dodge
 			if (new Random().Next(0, 100) < 75)
 			{

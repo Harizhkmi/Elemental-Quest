@@ -32,7 +32,7 @@ public class Elements{
 			elementInput = int.Parse(Console.ReadLine());
 		}
 
-		player.element = Elements.SetElement(elementInput);
+		player.Element = Elements.SetElement(elementInput);
 	}
 
 	public static string SetElement(int input)
